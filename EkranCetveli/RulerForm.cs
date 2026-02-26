@@ -1,8 +1,4 @@
-﻿using System;
-using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Drawing.Text;
-using System.Windows.Forms;
+﻿using System.Drawing.Drawing2D;
 
 namespace FloatingRuler
 {
@@ -10,7 +6,7 @@ namespace FloatingRuler
     {
         private float angle = 0f;
         private int rulerWidth = 600;
-        private int rulerHeight = 50;
+        private const int rulerHeight = 50;
 
         private bool dragging = false;
         private bool resizingLeft = false;
@@ -32,9 +28,9 @@ namespace FloatingRuler
 
             UpdateFormBounds();
 
-            this.MouseDown += MouseDownHandler;
-            this.MouseMove += MouseMoveHandler;
-            this.MouseUp += (s, e) =>
+            MouseDown += MouseDownHandler;
+            MouseMove += MouseMoveHandler;
+            MouseUp += (s, e) =>
             {
                 dragging = false;
                 resizingLeft = false;
@@ -46,7 +42,7 @@ namespace FloatingRuler
 
         // ---------------- ROTATION ----------------
 
-        private void MouseWheelHandler(object sender, MouseEventArgs e)
+        private void MouseWheelHandler(object? sender, MouseEventArgs e)
         {
             if (ModifierKeys == Keys.Control)
             {
@@ -69,7 +65,7 @@ namespace FloatingRuler
 
         // ---------------- DRAG & RESIZE ----------------
 
-        private void MouseDownHandler(object sender, MouseEventArgs e)
+        private void MouseDownHandler(object? sender, MouseEventArgs e)
         {
             dragStart = Cursor.Position;
 
@@ -81,7 +77,7 @@ namespace FloatingRuler
                 dragging = true;
         }
 
-        private void MouseMoveHandler(object sender, MouseEventArgs e)
+        private void MouseMoveHandler(object? sender, MouseEventArgs e)
         {
             if (resizingLeft)
             {
@@ -137,11 +133,11 @@ namespace FloatingRuler
 
         private void UpdateRegion()
         {
-            GraphicsPath path = new GraphicsPath();
+            GraphicsPath path = new();
 
             Rectangle rect = GetCenteredRect();
 
-            Matrix m = new Matrix();
+            Matrix m = new();
             m.RotateAt(angle,
                 new PointF(Width / 2f, Height / 2f));
 
