@@ -1,5 +1,4 @@
 namespace FloatingRuler;
-
 static class Program
 {
     [STAThread]
